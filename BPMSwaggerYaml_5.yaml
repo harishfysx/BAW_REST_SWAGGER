@@ -64,7 +64,7 @@ paths:
         '200':
           description: Items were successfully retrieved.
           schema:
-            $ref: '#/definitions/UserDetails'
+            $ref: '#/definitions/UsersDetails'
         '400':
           description: 'The request contains invalid parameters, or they are missing.'
           schema:
@@ -288,40 +288,43 @@ definitions:
         type: boolean
       ID:
         type: string
+  UserProp:
+    description: individual User
+    type: object
+    properties:
+      userID:
+        type: integer
+        format: int32
+      userName:
+        type: string
+      fullName:
+        type: string
+      isDisabled:
+        type: boolean
+      primaryGroup:
+        type: string
+        format: nullable
+      emailAddress:
+        type: string
+        format: nullable
+      editableUserPreferences:
+        type: array
+        items:
+            type: string
+      tasksCollaboration:
+        type: string
+        format: nullable
+      memberships:
+        type: array
+        items:
+          type: string
   UserDetails:
     description: UserDetails
     properties:
       status:
        type: string
       data:
-        type: object
-        properties:
-          userID:
-            type: integer
-            format: int32
-          userName:
-            type: string
-          fullName:
-            type: string
-          isDisabled:
-            type: boolean
-          primaryGroup:
-            type: string
-            format: nullable
-          emailAddress:
-            type: string
-            format: nullable
-          editableUserPreferences:
-                type: array
-                items:
-                 type: string
-          tasksCollaboration:
-                type: string
-                format: nullable
-          memberships:
-                type: array
-                items:
-                  type: string
+        $ref: '#/definitions/UserProp'
   RetrieveGlobalTeamListItem:
     description: Retrieves list of Teams
     properties:
@@ -345,3 +348,16 @@ definitions:
         type: string
       data:
         $ref: '#/definitions/RetrieveGlobalTeamList'
+  UsersDetails:
+    description: list of users
+    properties:
+      status:
+        type: string
+      data:
+        type: object
+        properties:
+          users:
+            type: array
+            items:
+             $ref: '#/definitions/UserProp'
+        
