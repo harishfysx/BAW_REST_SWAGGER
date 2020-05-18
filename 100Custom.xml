@@ -1,0 +1,5 @@
+<server>
+   <rest merge="mergeChildren">
+      <allowed-origins>*</allowed-origins>
+   </rest>
+</server>
